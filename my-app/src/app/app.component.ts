@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+
+  navItem: string = 'shopping';
+
+  NavigateItem(event){
+    this.navItem = event;
+  }
+
 }
+
+
