@@ -15,10 +15,4 @@ export class RecipesComponent implements OnInit {
   ngOnInit(): void {
   }
   
-
-  RetrieveRecipeDtls(event){
-    this.recipe = event;
-  }
-
-
 }
