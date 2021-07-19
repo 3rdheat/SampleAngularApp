@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipes.model';
 @Component({
   selector: 'app-recipe-list',
@@ -6,23 +7,20 @@ import { Recipe } from '../recipes.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe("Adobong manac","chicken with soy sauce and vinegar","https://upload.wikimedia.org/wikipedia/commons/3/38/Chicken_adobo.jpg"),
-    new Recipe("Sinigang","super kilig","https://th.bing.com/th/id/R.faa347dd003c8058c8d126194d8c90d6?rik=uLzoRo2s8%2bLibQ&riu=http%3a%2f%2fwww.angsarap.net%2fwp-content%2fuploads%2f2014%2f01%2fsinigang-na-baboy-wide.jpg&ehk=pYkg73qwrPyDAM4pGcjk5N5ivhgjUSdfxVoU3r53zkc%3d&risl=&pid=ImgRaw")
-  ];
-
+ 
   selectedRecipe: Recipe;
+  recipes: Recipe[];
 
-  @Output() onRetrieve = new EventEmitter<Recipe>();
 
-  
-  constructor() { }
+  constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
+    this.recipes = this.recipeService.GetRecipes();
   }
 
-  GetRecipeDetails(value: Recipe){
-    this.onRetrieve.emit(value);
-   }
+  // GetRecipeDetails(value: Recipe){
+  //   this.onRetrieve.emit(value);
+  //   this.recipeService.GetRecipeDtls(value.name);
+  //  }
 
 }
