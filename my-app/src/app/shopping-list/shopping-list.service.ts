@@ -3,9 +3,8 @@ import { Ingredient } from "../shared/ingredient.model";
 
 export class ShoppingListService{
     
-    ingredients: Ingredient [] = [];
     onChangeIng = new EventEmitter<Ingredient[]>();
-
+    private ingredients: Ingredient [] = [];
 
     Collection(){
         return this.ingredients.slice();
@@ -16,5 +15,9 @@ export class ShoppingListService{
         this.onChangeIng.emit(this.ingredients.slice());
     }
 
+    BulkInsert(ingredients: Ingredient[]){
+        this.ingredients.push(...ingredients);
+        this.onChangeIng.emit(this.ingredients.slice());
+    }
 
 }

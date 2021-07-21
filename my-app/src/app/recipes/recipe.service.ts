@@ -1,23 +1,42 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Ingredient } from "../shared/ingredient.model";
+import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Recipe } from "./recipes.model";
 
+@Injectable()
 export class RecipeService{
 
   recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-        new Recipe("Adobong manac","chicken with soy sauce and vinegar","https://upload.wikimedia.org/wikipedia/commons/3/38/Chicken_adobo.jpg"),
-        new Recipe("Sinigang","super kilig","https://th.bing.com/th/id/R.faa347dd003c8058c8d126194d8c90d6?rik=uLzoRo2s8%2bLibQ&riu=http%3a%2f%2fwww.angsarap.net%2fwp-content%2fuploads%2f2014%2f01%2fsinigang-na-baboy-wide.jpg&ehk=pYkg73qwrPyDAM4pGcjk5N5ivhgjUSdfxVoU3r53zkc%3d&risl=&pid=ImgRaw")
+        new Recipe(
+          "Adobong manac",
+          "chicken with soy sauce and vinegar",
+          "https://upload.wikimedia.org/wikipedia/commons/3/38/Chicken_adobo.jpg",
+          [new Ingredient('Onions', 6), new Ingredient('Garlic', 4)]
+          ),
+        new Recipe(
+          "Sinigang",
+          "super kilig",
+          "https://th.bing.com/th/id/R.faa347dd003c8058c8d126194d8c90d6?rik=uLzoRo2s8%2bLibQ&riu=http%3a%2f%2fwww.angsarap.net%2fwp-content%2fuploads%2f2014%2f01%2fsinigang-na-baboy-wide.jpg&ehk=pYkg73qwrPyDAM4pGcjk5N5ivhgjUSdfxVoU3r53zkc%3d&risl=&pid=ImgRaw",
+          [new Ingredient('Tomatoes', 8), new Ingredient('Siling Green', 10)]
+          )
       ];
 
-GetRecipes(){
+constructor(private shoppingListService: ShoppingListService){}
+
+Collection(){
     return this.recipes.slice();
 }
 
-GetSelectedRecipe(recipe: Recipe)
+Find(recipe: Recipe)
 {
     const recipeName = recipe.name;
     this.recipeSelected.emit(this.recipes.find(({name}) => name === recipeName));
+}
+
+Insert(ingredients: Ingredient[]){
+  this.shoppingListService.BulkInsert(ingredients);
 }
 
 }

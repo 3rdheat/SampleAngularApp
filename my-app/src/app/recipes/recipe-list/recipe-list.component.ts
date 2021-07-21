@@ -15,12 +15,7 @@ export class RecipeListComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipes = this.recipeService.GetRecipes();
+    this.recipes = this.recipeService.Collection();
   }
-
-  // GetRecipeDetails(value: Recipe){
-  //   this.onRetrieve.emit(value);
-  //   this.recipeService.GetRecipeDtls(value.name);
-  //  }
 
 }
