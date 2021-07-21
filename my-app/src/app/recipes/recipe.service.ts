@@ -14,4 +14,10 @@ GetRecipes(){
     return this.recipes.slice();
 }
 
+GetSelectedRecipe(recipe: Recipe)
+{
+    const recipeName = recipe.name;
+    this.recipeSelected.emit(this.recipes.find(({name}) => name === recipeName));
+}
+
 }
