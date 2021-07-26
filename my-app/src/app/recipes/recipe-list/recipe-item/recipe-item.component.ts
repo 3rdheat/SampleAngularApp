@@ -17,7 +17,7 @@ export class RecipeItemComponent implements OnInit {
   }
 
   onSelected(){
-    this.recipeService.Find(this.recipe);
+    this.recipeService.Find(this.recipe.id);
   }
 
 
